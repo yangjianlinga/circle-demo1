@@ -13,8 +13,8 @@ jobs:
       - checkout
       - run: echo 'A first Hello'
       - run:
-        name: Install
-        command: npm Install
+          name: Install
+          command: npm Install
       - run:
-        name: build
-        command: npm run build
+          name: build
+          command: npm run build

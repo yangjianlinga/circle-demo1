@@ -11,10 +11,25 @@ jobs:
           fingerprints:
             - "bd:a6:a4:0b:b5:71:be:69:5d:f9:b0:16:ef:69:b6:de"
       - checkout
+      - restore_cache:
+          keys:
+            - dependencies_imooc
       - run: echo 'A first Hello'
       - run:
           name: Install
           command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies_imooc
       - run:
           name: Build
           command: npm run build
+      - run:
+          name: Prepare shell command
+          # shell chmod +x 赋予执行权限
+          # 执行shell脚本
+          command: chmod +x scripts/deploy.sh
+      - run:
+          name: Run Deploy to Github pages
+          command: ./scripts/deploy.sh
